@@ -11,6 +11,7 @@ namespace Combat.Utils {
             GameObject terrainElement = new GameObject();
             GridElementBuilder.generateCube(height).transform.parent = terrainElement.transform;
             GridElementBuilder.generateIndicator(height).transform.parent = terrainElement.transform;
+            GridElementBuilder.generateMark(height).transform.parent = terrainElement.transform;
             
             terrainElement.AddComponent<GridElement>();
 
@@ -89,6 +90,40 @@ namespace Combat.Utils {
             GameObject element = GameObject.CreatePrimitive(PrimitiveType.Cube);
             element.transform.localScale = new Vector3(1, 0.0001f, 1);
             return element;
+        }
+        
+        private static GameObject generateMark(int height) {
+            GameObject markContainer = new GameObject();
+            markContainer.gameObject.name = "mark";
+            markContainer.transform.position = new Vector3(0, height + .1f, 0);
+
+            GameObject northMark = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            northMark.transform.parent = markContainer.transform;
+            northMark.transform.localScale = new Vector3(1f, 0.01f, 0.1f);
+            northMark.transform.localPosition = new Vector3(0, 0.01f, -0.45f);
+            northMark.gameObject.name = "northMark";
+            
+            GameObject eastMark = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            eastMark.transform.parent = markContainer.transform;
+            eastMark.transform.localScale = new Vector3(1f, 0.01f, 0.1f);
+            eastMark.transform.eulerAngles = new Vector3(0, 90f, 0);
+            eastMark.transform.localPosition = new Vector3(0.45f, 0.01f, 0);
+            eastMark.gameObject.name = "eastMark";
+
+            GameObject southMark = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            southMark.transform.parent = markContainer.transform;
+            southMark.transform.localScale = new Vector3(1f, 0.01f, 0.1f);
+            southMark.transform.localPosition = new Vector3(0, 0.01f, 0.45f);
+            southMark.gameObject.name = "southMark";
+
+            GameObject westMark = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            westMark.transform.parent = markContainer.transform;
+            westMark.transform.localScale = new Vector3(1f, 0.01f, 0.1f);
+            westMark.transform.eulerAngles = new Vector3(0, 90f, 0);
+            westMark.transform.localPosition = new Vector3(-0.45f, 0.01f, 0);
+            westMark.gameObject.name = "westMark";
+
+            return markContainer;
         }
 
         private static GameObject generateIndicator(int height) {
