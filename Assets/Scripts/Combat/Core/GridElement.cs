@@ -67,7 +67,7 @@ namespace Combat.Core {
                 this._westPanels.Add(child.gameObject);
             }
             
-            /*this._mark = this.transform.Find("mark").gameObject;
+            this._mark = this.transform.Find("mark").gameObject;
             this._northMark = this.transform.Find("mark/northMark").gameObject;
             this._eastMark = this.transform.Find("mark/eastMark").gameObject;
             this._southMark = this.transform.Find("mark/southMark").gameObject;
@@ -75,7 +75,7 @@ namespace Combat.Core {
 
             this._indicator = this.transform.Find("indicator").gameObject;
 
-            this._playerOnTile = null;*/
+            this._playerOnTile = null;
         }
 
         /**

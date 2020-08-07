@@ -8,7 +8,6 @@ using System;
 using System.IO;
 using Combat.Core;
 using Combat.Core.TileTypes;
-using Elements;
 using Elements.TileTypes;
 using UnityEngine;
 
@@ -40,13 +39,13 @@ namespace Combat.Utils {
 			terrainParent.transform.position = new Vector3(0, 0, 0);
 		
 			foreach(string line in fileContent) {
-				String[] map = line.Split('|');
+				string[] map = line.Split('|');
 				gridCounterVertical += 1;
 				
 				foreach(string tileInfo in map) {
-					String[] tileInfoSplit = tileInfo.Split(',');
+					string[] tileInfoSplit = tileInfo.Split(',');
 					int height = int.Parse(tileInfoSplit[0]);
-					String terrain = tileInfoSplit[1];
+					string terrain = tileInfoSplit[1];
 					
 					gridCounterHorizontal += 1;
 
@@ -59,7 +58,7 @@ namespace Combat.Utils {
 						throw new Exception("terrainElement could not be loaded from Prefabs. Aborting.");
 					}
 
-					gridElement.transform.name = String.Concat(gridCounterVertical, "-", gridCounterHorizontal);
+					gridElement.transform.name = string.Concat(gridCounterVertical, "-", gridCounterHorizontal);
 					gridElement.transform.position = new Vector3(positionX, 1f, positionZ);
 
 					positionX += 1;
@@ -72,37 +71,30 @@ namespace Combat.Utils {
 			}
 		}
 
-		private TileType getTileType(String terrainType) {
-			if(terrainType == "oc") {
-				return new Ocean();
+		private TileType getTileType(string terrainType) {
+			switch(terrainType) {
+				case "oc":
+					return new Ocean();
+				case "wa":
+					return new Water();
+				case "ro":
+					return new Rock();
+				case "sd":
+					return new Sand();
+				case "mg":
+					return new Magma();
+				case "so":
+					return new Snow();
+				case "di":
+					return new Dirt();
+				case "wo":
+					return new Wood();
+				case "gr":
+					return new Grass();
+				default:
+					//default
+					return new Grass();
 			}
-			if(terrainType == "wa") {
-				return new Water();
-			}
-			if(terrainType == "ro") {
-				return new Rock();
-			}
-			if(terrainType == "sd") {
-				return new Sand();
-			}
-			if(terrainType == "mg") {
-				return new Magma();
-			}
-			if(terrainType == "so") {
-				return new Snow();
-			}
-			if(terrainType == "di") {
-				return new Dirt();
-			}
-			if(terrainType == "wo") {
-				return new Wood();
-			}
-			if (terrainType == "gr") {
-				return new Grass();
-			}
-			
-			//default
-			return new Grass();
 		}
 	}
 }
